@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио звукорежиссёра</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #111;
+            color: #eee;
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        header {
+            text-align: center;
+            padding: 80px 20px 40px;
+        }
+        header h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+        header p {
+            font-size: 20px;
+            color: #aaa;
+        }
+        .block {
+            margin: 60px 0;
+        }
+        .block h2 {
+            font-size: 28px;
+            border-bottom: 2px solid #f0a500;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            transition: 0.2s;
+        }
+        .card:hover {
+            background: #252525;
+        }
+        .card .placeholder {
+            background: #2a2a2a;
+            height: 150px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        .contacts a {
+            color: #f0a500;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #555;
+            border-top: 1px solid #222;
+            margin-top: 40px;
+        }
+        .btn {
+            background: #f0a500;
+            color: #111;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background: #ffb700;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li::before {
+            content: "▹ ";
+            color: #f0a500;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 700px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Блок 1: Шапка -->
+    <header>
+        <h1>Иван Иванов</h1>
+        <p>Звукорежиссёр · Саунд-дизайнер</p>
+        <p style="font-size: 18px; color: #888;">Превращаю идею в чистый звук</p>
+        <a href="#" class="btn">Слушать портфолио</a>
+    </header>
+
+    <!-- Блок 2: Работы -->
+    <div class="block">
+        <h2>Проекты</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="placeholder">🎬 Видео 1</div>
+                <h3>Название проекта</h3>
+                <p style="color:#999;">Короткое описание</p>
+            </div>
+            <div class="card">
+                <div class="placeholder">🎬 Видео 2</div>
+                <h3>Название проекта</h3>
+                <p style="color:#999;">Короткое описание</p>
+            </div>
+            <div class="card">
+                <div class="placeholder">🎬 Видео 3</div>
+                <h3>Название проекта</h3>
+                <p style="color:#999;">Короткое описание</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок 3: О себе -->
+    <div class="block">
+        <h2>О себе</h2>
+        <p style="font-size: 18px;">Здесь будет текст о тебе. Например: "Занимаюсь звуком более 10 лет. Работаю в жанрах от инди-рока до электроники. Умею слышать детали и доводить звук до кристальной чистоты."</p>
+    </div>
+
+    <!-- Блок 4: Оборудование и навыки -->
+    <div class="block">
+        <h2>Оборудование и софт</h2>
+        <div class="info-grid">
+            <ul>
+                <li><strong>DAW:</strong> Pro Tools, Logic Pro, Reaper</li>
+                <li><strong>Плагины:</strong> Waves, FabFilter, iZotope</li>
+                <li><strong>Микрофоны:</strong> Neumann U87, Shure SM7B</li>
+            </ul>
+            <ul>
+                <li><strong>Мониторы:</strong> Genelec 8030, Yamaha HS8</li>
+                <li><strong>Наушники:</strong> Beyerdynamic DT 770, Sony MDR-7506</li>
+                <li><strong>Специализация:</strong> Сведение, мастеринг, запись вокала</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Блок 5: Образование и опыт -->
+    <div class="block">
+        <h2>Образование и опыт</h2>
+        <p><strong>Образование:</strong> Московский государственный институт культуры, специальность "Звукорежиссура" (2010–2015).</p>
+        <p><strong>Опыт:</strong> Студия "Звукоград" (2015–2018), студия "Мосфильм" (2018–2021), фриланс (2021–н.в.). Работал с артистами: группа "Машина времени", Земфира, Noize MC.</p>
+    </div>
+
+    <!-- Блок 6: Контакты -->
+    <div class="block contacts">
+        <h2>Контакты</h2>
+        <p>
+            <a href="mailto:ivan@example.com">✉️ ivan@example.com</a>
+            <a href="https://t.me/ivan_sound">📱 Telegram</a>
+            <a href="#">📸 Instagram</a>
+        </p>
+        <p>Или напиши прямо сейчас:</p>
+        <a href="mailto:ivan@example.com" class="btn">Написать</a>
+    </div>
+
+    <footer>
+        &copy; 2026 Иван Иванов · Сделано на GitHub Pages
+    </footer>
+
+</div>
+
+</body>
+</html>
