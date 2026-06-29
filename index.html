@@ -127,27 +127,64 @@
         <a href="#" class="btn">Слушать портфолио</a>
     </header>
 
-    <!-- Блок 2: Работы -->
-    <div class="block">
-        <h2>Проекты</h2>
-        <div class="grid">
-            <div class="card">
-                <div class="placeholder">🎬 Видео 1</div>
-                <h3>Название проекта</h3>
-                <p style="color:#999;">Короткое описание</p>
-            </div>
-            <div class="card">
-                <div class="placeholder">🎬 Видео 2</div>
-                <h3>Название проекта</h3>
-                <p style="color:#999;">Короткое описание</p>
-            </div>
-            <div class="card">
-                <div class="placeholder">🎬 Видео 3</div>
-                <h3>Название проекта</h3>
-                <p style="color:#999;">Короткое описание</p>
-            </div>
+    <!-- Блок 2: Проекты (с плеерами) -->
+<div class="block">
+    <h2>Проекты</h2>
+    <div class="grid">
+        <!-- КАРТОЧКА 1: ВИДЕО -->
+        <div class="card">
+            <video
+                id="player1"
+                class="video-js vjs-default-skin"
+                controls
+                preload="auto"
+                width="100%"
+                height="200"
+                data-setup='{}'
+            >
+                <source src="ССЫЛКА_НА_ВИДЕО_1_ПОКА_ЛЮБАЯ" type="video/mp4">
+                <p class="vjs-no-js">Для просмотра видео включите JavaScript</p>
+            </video>
+            <h3>Название проекта 1</h3>
+            <p style="color:#999;">Жанр / год / роль</p>
+        </div>
+
+        <!-- КАРТОЧКА 2: АУДИО -->
+        <div class="card">
+            <audio
+                id="player2"
+                class="video-js vjs-default-skin"
+                controls
+                preload="auto"
+                width="100%"
+                data-setup='{}'
+            >
+                <source src="ССЫЛКА_НА_АУДИО_2_ПОКА_ЛЮБАЯ" type="audio/mp3">
+                <p class="vjs-no-js">Для прослушивания аудио включите JavaScript</p>
+            </audio>
+            <h3>Название проекта 2</h3>
+            <p style="color:#999;">Жанр / год / роль</p>
+        </div>
+
+        <!-- КАРТОЧКА 3: ВИДЕО -->
+        <div class="card">
+            <video
+                id="player3"
+                class="video-js vjs-default-skin"
+                controls
+                preload="auto"
+                width="100%"
+                height="200"
+                data-setup='{}'
+            >
+                <source src="ССЫЛКА_НА_ВИДЕО_3_ПОКА_ЛЮБАЯ" type="video/mp4">
+                <p class="vjs-no-js">Для просмотра видео включите JavaScript</p>
+            </video>
+            <h3>Название проекта 3</h3>
+            <p style="color:#999;">Жанр / год / роль</p>
         </div>
     </div>
+</div>
 
     <!-- Блок 3: О себе -->
     <div class="block">
