@@ -21,6 +21,27 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Струны */
+        .resonance-string {
+            position: fixed;
+            top: 0;
+            width: 1px;
+            height: 100vh;
+            background: #e0a968;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.08;
+            transition: opacity 0.8s ease;
+        }
+        .string-left {
+            left: 20px;
+        }
+        .string-right {
+            right: 20px;
         }
         
         /* Шапка */
@@ -33,7 +54,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             letter-spacing: -1.5px;
-            background: linear-gradient(135deg, #d4a574, #cd9a62);
+            background: linear-gradient(135deg, #e0a968, #d4954a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -44,7 +65,7 @@
         }
         .btn {
             background: transparent;
-            color: #d4a574;
+            color: #e0a968;
             padding: 14px 36px;
             border-radius: 8px;
             font-weight: 500;
@@ -52,14 +73,14 @@
             display: inline-block;
             margin-top: 30px;
             letter-spacing: 1px;
-            border: 1.5px solid #d4a574;
+            border: 1.5px solid #e0a968;
             transition: all 0.3s ease;
         }
         .btn:hover {
-            background: #d4a574;
+            background: #e0a968;
             color: #0a0a0a;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(212, 167, 116, 0.25);
+            box-shadow: 0 10px 25px rgba(224, 169, 104, 0.3);
         }
 
         /* Фильтры */
@@ -82,8 +103,8 @@
             font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
-            background: #d4a574;
-            border-color: #d4a574;
+            background: #e0a968;
+            border-color: #e0a968;
             color: #0a0a0a;
             font-weight: 500;
         }
@@ -106,7 +127,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: #d4a574;
+            background: #e0a968;
         }
 
         /* Сетка карточек */
@@ -114,6 +135,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
+            position: relative;
+            z-index: 1;
         }
         .card {
             background: #111;
@@ -204,12 +227,12 @@
         }
         ul li::before {
             content: "▹";
-            color: #d4a574;
+            color: #e0a968;
             position: absolute;
             left: 0;
         }
         .contacts a {
-            color: #d4a574;
+            color: #e0a968;
             text-decoration: none;
             margin-right: 25px;
             font-size: 18px;
@@ -230,259 +253,227 @@
             header h1 { font-size: 36px; }
             .grid { grid-template-columns: 1fr; }
         }
-        /* Струны */
-.resonance-string {
-    position: fixed;
-    top: 0;
-    width: 1px;
-    height: 100vh;
-    background: #e0a968;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.08;
-    transition: opacity 0.8s ease;
-}
-.string-left {
-    left: 20px;
-}
-.string-right {
-    right: 20px;
-}
-/* Чтобы карточки были выше струн */
-.grid {
-    position: relative;
-    z-index: 1;
-}
-/* Цвет бронзы — ярче */
-.btn, .filter-btn:hover, .filter-btn.active, .block h2::after, ul li::before, .contacts a {
-    /* замени везде d4a574 на e0a968 */
-}
-.btn {
-    border-color: #e0a968;
-    color: #e0a968;
-}
     </style>
 </head>
 <body>
+
+    <!-- СТРУНЫ -->
     <div class="resonance-string string-left"></div>
     <div class="resonance-string string-right"></div>
 
-<div class="container">
+    <div class="container">
 
-    <header>
-        <h1>Юлия Кузнецова</h1>
-        <p>Звукорежиссёр · Саунд-дизайнер</p>
-        <p style="font-size: 18px; color: #888; margin-top: 10px;">Превращаю идею в чистый звук</p>
-        <a href="#projects" class="btn">Смотреть портфолио</a>
-    </header>
+        <header>
+            <h1>Юлия Кузнецова</h1>
+            <p>Звукорежиссёр · Саунд-дизайнер</p>
+            <p style="font-size: 18px; color: #888; margin-top: 10px;">Превращаю идею в чистый звук</p>
+            <a href="#projects" class="btn">Смотреть портфолио</a>
+        </header>
 
-    <!-- ФИЛЬТРЫ -->
-    <div class="filters" id="projects">
-        <button class="filter-btn active" onclick="filterCards('all')">Все работы</button>
-        <button class="filter-btn" onclick="filterCards('video')">🎬 Видео</button>
-        <button class="filter-btn" onclick="filterCards('audio')">🎧 Аудио</button>
-    </div>
+        <!-- ФИЛЬТРЫ -->
+        <div class="filters" id="projects">
+            <button class="filter-btn active" onclick="filterCards('all')">Все работы</button>
+            <button class="filter-btn" onclick="filterCards('video')">🎬 Видео</button>
+            <button class="filter-btn" onclick="filterCards('audio')">🎧 Аудио</button>
+        </div>
 
-    <!-- ПРОЕКТЫ -->
-    <div class="grid" id="projectGrid">
-        
-        <!-- 1 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/d15dCYtfuX7mtc3x9Jc2iM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 1</h3><p>Кино / 2024 / Звукорежиссёр</p></div>
-        </div>
-        <!-- 2 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/8XnN2xFXJFDukWHzZHEgnH" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 2</h3><p>Реклама / 2023 / Саунд-дизайн</p></div>
-        </div>
-        <!-- 3 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/iNQF3dtMKR7PPJ1zEUGPbb" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 3</h3><p>Клип / 2024 / Сведение</p></div>
-        </div>
-        <!-- 4 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/spYPZNdzaPq3vUeJ4k4aSx" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 4</h3><p>Короткий метр / 2023 / Звук на площадке</p></div>
-        </div>
-        <!-- 5 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/9SJDK6LZ3U1SDNY5AtauYu" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 5</h3><p>Кино / 2024 / Мастеринг</p></div>
-        </div>
-        <!-- 6 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/mgxY8rjsz4YpGALoXQt2rz" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 6</h3><p>Анимация / 2024 / Озвучка, сведение</p></div>
-        </div>
-        <!-- 7 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/kt9z38D3G6HCN6s8hEm9WM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 7</h3><p>Док / 2023 / Интершум, чистка</p></div>
-        </div>
-        <!-- 8 вертикальное -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper vertical"><iframe src="https://kinescope.io/embed/0E5Tgt9s964M95XiPuFDCn" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 8</h3><p>Вертикальное видео / 2024</p></div>
-        </div>
-        <!-- 9 -->
-        <div class="card" data-category="video">
-            <div class="video-wrapper"><iframe src="https://kinescope.io/embed/rVBcXQxMgsPgFmzs4hjd1P" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-            <div class="card-content"><h3>Название проекта 9</h3><p>ТВ-шоу / 2024 / Постпродакшн</p></div>
-        </div>
-        <!-- 10 -->
-        <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
-            <div class="card-content">
-                <h3>The Poem</h3><p>Озвучка, мастеринг</p>
-                <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The_Poem .mp3" type="audio/mpeg"></audio>
-            </div>
-        </div>
-        <!-- 11 -->
-        <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
-            <div class="card-content">
-                <h3>The Fragment Of The Blue Grid</h3><p>Сведение, чистка шумов</p>
-                <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The%20Fragment%20Of%20The%20Blue%20Grid%20Podcast.mp3" type="audio/mpeg"></audio>
-            </div>
-        </div>
-        <!-- 12 -->
-        <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
-            <div class="card-content">
-                <h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Интервью</p>
-                <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Episode%2011%20Lt%20Col%20(Dr.)%20Cynthia%20Rutherford.mp3" type="audio/mpeg"></audio>
-            </div>
-        </div>
-        <!-- 13 -->
-        <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
-            <div class="card-content">
-                <h3>Blue Grit Episode 1 Colonel Hammiel</h3><p>Запись, постпродакшн</p>
-                <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Blue%20Grit%20Episode%201%20Colonel%20Hammiel.mp3" type="audio/mpeg"></audio>
-            </div>
-        </div>
-        <!-- 14 -->
-        <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
-            <div class="card-content">
-                <h3>Audiobook Lost In The Post</h3><p>Актёрская озвучка</p>
-                <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Audiobook_LostInThePost.mp3" type="audio/mpeg"></audio>
-            </div>
-        </div>
-    </div>
-
-    <!-- О себе -->
-    <div class="block">
-        <h2>О себе</h2>
-        <p style="font-size: 18px;">Занимаюсь звуком более 10 лет. Работаю в жанрах от инди-рока до электроники. Умею слышать детали и доводить звук до кристальной чистоты. Открыт к любым экспериментальным проектам.</p>
-    </div>
-
-    <!-- Оборудование -->
-    <div class="block">
-        <h2>Оборудование и софт</h2>
-        <div class="info-grid">
-            <ul>
-                <li><strong>DAW:</strong> Pro Tools, Logic Pro, Reaper</li>
-                <li><strong>Плагины:</strong> Waves, FabFilter, iZotope</li>
-                <li><strong>Микрофоны:</strong> Neumann U87, Shure SM7B</li>
-            </ul>
-            <ul>
-                <li><strong>Мониторы:</strong> Genelec 8030, Yamaha HS8</li>
-                <li><strong>Наушники:</strong> Beyerdynamic DT 770, Sony MDR-7506</li>
-                <li><strong>Специализация:</strong> Сведение, мастеринг, запись вокала</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Опыт -->
-    <div class="block">
-        <h2>Образование и опыт</h2>
-        <p><strong>Образование:</strong> Московский государственный институт культуры, специальность "Звукорежиссура" (2010–2015).</p>
-        <p style="margin-top: 15px;"><strong>Опыт:</strong> Студия "Звукоград" (2015–2018), студия "Мосфильм" (2018–2021), фриланс (2021–н.в.). Работал с артистами: группа "Машина времени", Земфира, Noize MC.</p>
-    </div>
-
-    <!-- Контакты -->
-    <div class="block contacts">
-        <h2>Контакты</h2>
-        <p>
-            <a href="mailto:ivan@example.com">✉️ ivan@example.com</a>
-            <a href="https://t.me/ivan_sound">📱 Telegram</a>
-            <a href="#">📸 Instagram</a>
-        </p>
-        <a href="mailto:ivan@example.com" class="btn">Написать</a>
-    </div>
-
-    <footer>
-        &copy; 2026 Юлия Кузнецова · Сделано на GitHub Pages
-    </footer>
-</div>
-
-<!-- Скрипт для фильтров -->
-<script>
-    function filterCards(category) {
-        const cards = document.querySelectorAll('#projectGrid .card');
-        const btns = document.querySelectorAll('.filter-btn');
-        
-        btns.forEach(b => b.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        cards.forEach(card => {
-            card.style.display = 'none';
-            card.style.animation = 'none';
-            card.offsetHeight;
-            card.style.animation = 'fadeInUp 0.6s forwards';
+        <!-- ПРОЕКТЫ -->
+        <div class="grid" id="projectGrid">
             
-            if (category === 'all' || card.dataset.category.includes(category)) {
-                card.style.display = 'block';
+            <!-- 1 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/d15dCYtfuX7mtc3x9Jc2iM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 1</h3><p>Кино / 2024 / Звукорежиссёр</p></div>
+            </div>
+            <!-- 2 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/8XnN2xFXJFDukWHzZHEgnH" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 2</h3><p>Реклама / 2023 / Саунд-дизайн</p></div>
+            </div>
+            <!-- 3 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/iNQF3dtMKR7PPJ1zEUGPbb" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 3</h3><p>Клип / 2024 / Сведение</p></div>
+            </div>
+            <!-- 4 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/spYPZNdzaPq3vUeJ4k4aSx" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 4</h3><p>Короткий метр / 2023 / Звук на площадке</p></div>
+            </div>
+            <!-- 5 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/9SJDK6LZ3U1SDNY5AtauYu" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 5</h3><p>Кино / 2024 / Мастеринг</p></div>
+            </div>
+            <!-- 6 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/mgxY8rjsz4YpGALoXQt2rz" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 6</h3><p>Анимация / 2024 / Озвучка, сведение</p></div>
+            </div>
+            <!-- 7 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/kt9z38D3G6HCN6s8hEm9WM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 7</h3><p>Док / 2023 / Интершум, чистка</p></div>
+            </div>
+            <!-- 8 вертикальное -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper vertical"><iframe src="https://kinescope.io/embed/0E5Tgt9s964M95XiPuFDCn" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 8</h3><p>Вертикальное видео / 2024</p></div>
+            </div>
+            <!-- 9 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/rVBcXQxMgsPgFmzs4hjd1P" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Название проекта 9</h3><p>ТВ-шоу / 2024 / Постпродакшн</p></div>
+            </div>
+            <!-- 10 -->
+            <div class="card audio-card" data-category="audio">
+                <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
+                <div class="card-content">
+                    <h3>The Poem</h3><p>Озвучка, мастеринг</p>
+                    <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The_Poem .mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <!-- 11 -->
+            <div class="card audio-card" data-category="audio">
+                <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
+                <div class="card-content">
+                    <h3>The Fragment Of The Blue Grid</h3><p>Сведение, чистка шумов</p>
+                    <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The%20Fragment%20Of%20The%20Blue%20Grid%20Podcast.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <!-- 12 -->
+            <div class="card audio-card" data-category="audio">
+                <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
+                <div class="card-content">
+                    <h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Интервью</p>
+                    <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Episode%2011%20Lt%20Col%20(Dr.)%20Cynthia%20Rutherford.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <!-- 13 -->
+            <div class="card audio-card" data-category="audio">
+                <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
+                <div class="card-content">
+                    <h3>Blue Grit Episode 1 Colonel Hammiel</h3><p>Запись, постпродакшн</p>
+                    <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Blue%20Grit%20Episode%201%20Colonel%20Hammiel.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+            <!-- 14 -->
+            <div class="card audio-card" data-category="audio">
+                <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
+                <div class="card-content">
+                    <h3>Audiobook Lost In The Post</h3><p>Актёрская озвучка</p>
+                    <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Audiobook_LostInThePost.mp3" type="audio/mpeg"></audio>
+                </div>
+            </div>
+        </div>
+
+        <!-- О себе -->
+        <div class="block">
+            <h2>О себе</h2>
+            <p style="font-size: 18px;">Занимаюсь звуком более 10 лет. Работаю в жанрах от инди-рока до электроники. Умею слышать детали и доводить звук до кристальной чистоты. Открыта к любым экспериментальным проектам.</p>
+        </div>
+
+        <!-- Оборудование -->
+        <div class="block">
+            <h2>Оборудование и софт</h2>
+            <div class="info-grid">
+                <ul>
+                    <li><strong>DAW:</strong> Pro Tools, Logic Pro, Reaper</li>
+                    <li><strong>Плагины:</strong> Waves, FabFilter, iZotope</li>
+                    <li><strong>Микрофоны:</strong> Neumann U87, Shure SM7B</li>
+                </ul>
+                <ul>
+                    <li><strong>Мониторы:</strong> Genelec 8030, Yamaha HS8</li>
+                    <li><strong>Наушники:</strong> Beyerdynamic DT 770, Sony MDR-7506</li>
+                    <li><strong>Специализация:</strong> Сведение, мастеринг, запись вокала</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Опыт -->
+        <div class="block">
+            <h2>Образование и опыт</h2>
+            <p><strong>Образование:</strong> Московский государственный институт культуры, специальность "Звукорежиссура" (2010–2015).</p>
+            <p style="margin-top: 15px;"><strong>Опыт:</strong> Студия "Звукоград" (2015–2018), студия "Мосфильм" (2018–2021), фриланс (2021–н.в.). Работала с артистами: группа "Машина времени", Земфира, Noize MC.</p>
+        </div>
+
+        <!-- Контакты -->
+        <div class="block contacts">
+            <h2>Контакты</h2>
+            <p>
+                <a href="mailto:ivan@example.com">✉️ ivan@example.com</a>
+                <a href="https://t.me/ivan_sound">📱 Telegram</a>
+                <a href="#">📸 Instagram</a>
+            </p>
+            <a href="mailto:ivan@example.com" class="btn">Написать</a>
+        </div>
+
+        <footer>
+            &copy; 2026 Юлия Кузнецова · Сделано на GitHub Pages
+        </footer>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+        // Фильтры
+        function filterCards(category) {
+            const cards = document.querySelectorAll('#projectGrid .card');
+            const btns = document.querySelectorAll('.filter-btn');
+            
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                card.style.display = 'none';
+                card.style.animation = 'none';
+                card.offsetHeight;
+                card.style.animation = 'fadeInUp 0.6s forwards';
+                
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = 'block';
+                }
+            });
+        }
+
+        // Живые струны
+        const leftString = document.querySelector('.string-left');
+        const rightString = document.querySelector('.string-right');
+
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        function updateStrings() {
+            const currentScrollY = window.scrollY;
+            const speed = Math.abs(currentScrollY - lastScrollY);
+            
+            const intensity = Math.min(speed / 15, 1);
+            const opacity = 0.08 + intensity * 0.32;
+            
+            if (leftString && rightString) {
+                leftString.style.opacity = opacity;
+                rightString.style.opacity = opacity;
+            }
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateStrings);
+                ticking = true;
             }
         });
-    }
-</script>
 
-    // Живые струны
-const leftString = document.querySelector('.string-left');
-const rightString = document.querySelector('.string-right');
-
-let lastScrollY = window.scrollY;
-let ticking = false;
-
-function updateStrings() {
-    const currentScrollY = window.scrollY;
-    const speed = Math.abs(currentScrollY - lastScrollY);
-    
-    // Нормализуем скорость скролла (0-1)
-    const intensity = Math.min(speed / 15, 1);
-    
-    // Переводим в opacity (0.08 - 0.4)
-    const opacity = 0.08 + intensity * 0.32;
-    
-    if (leftString && rightString) {
-        leftString.style.opacity = opacity;
-        rightString.style.opacity = opacity;
-    }
-    
-    lastScrollY = currentScrollY;
-    ticking = false;
-}
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        requestAnimationFrame(updateStrings);
-        ticking = true;
-    }
-});
-
-// Плавное затухание при остановке
-let idleTimer;
-window.addEventListener('scroll', () => {
-    clearTimeout(idleTimer);
-    idleTimer = setTimeout(() => {
-        if (leftString) leftString.style.opacity = 0.08;
-        if (rightString) rightString.style.opacity = 0.08;
-    }, 800);
-});
+        let idleTimer;
+        window.addEventListener('scroll', () => {
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                if (leftString) leftString.style.opacity = 0.08;
+                if (rightString) rightString.style.opacity = 0.08;
+            }, 800);
+        });
+    </script>
 
 </body>
 </html>
