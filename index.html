@@ -230,9 +230,42 @@
             header h1 { font-size: 36px; }
             .grid { grid-template-columns: 1fr; }
         }
+        /* Струны */
+.resonance-string {
+    position: fixed;
+    top: 0;
+    width: 1px;
+    height: 100vh;
+    background: #e0a968;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.08;
+    transition: opacity 0.8s ease;
+}
+.string-left {
+    left: 20px;
+}
+.string-right {
+    right: 20px;
+}
+/* Чтобы карточки были выше струн */
+.grid {
+    position: relative;
+    z-index: 1;
+}
+/* Цвет бронзы — ярче */
+.btn, .filter-btn:hover, .filter-btn.active, .block h2::after, ul li::before, .contacts a {
+    /* замени везде d4a574 на e0a968 */
+}
+.btn {
+    border-color: #e0a968;
+    color: #e0a968;
+}
     </style>
 </head>
 <body>
+    <div class="resonance-string string-left"></div>
+    <div class="resonance-string string-right"></div>
 
 <div class="container">
 
@@ -407,6 +440,49 @@
         });
     }
 </script>
+
+    // Живые струны
+const leftString = document.querySelector('.string-left');
+const rightString = document.querySelector('.string-right');
+
+let lastScrollY = window.scrollY;
+let ticking = false;
+
+function updateStrings() {
+    const currentScrollY = window.scrollY;
+    const speed = Math.abs(currentScrollY - lastScrollY);
+    
+    // Нормализуем скорость скролла (0-1)
+    const intensity = Math.min(speed / 15, 1);
+    
+    // Переводим в opacity (0.08 - 0.4)
+    const opacity = 0.08 + intensity * 0.32;
+    
+    if (leftString && rightString) {
+        leftString.style.opacity = opacity;
+        rightString.style.opacity = opacity;
+    }
+    
+    lastScrollY = currentScrollY;
+    ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        requestAnimationFrame(updateStrings);
+        ticking = true;
+    }
+});
+
+// Плавное затухание при остановке
+let idleTimer;
+window.addEventListener('scroll', () => {
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => {
+        if (leftString) leftString.style.opacity = 0.08;
+        if (rightString) rightString.style.opacity = 0.08;
+    }, 800);
+});
 
 </body>
 </html>
