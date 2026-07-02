@@ -25,23 +25,47 @@
             z-index: 1;
         }
         
-        /* Струны */
-        .resonance-string {
+        /* Группы струн */
+        .string-group {
             position: fixed;
             top: 0;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            gap: 6px;
+        }
+        .string-group-left {
+            left: 16px;
+            flex-direction: row;
+        }
+        .string-group-right {
+            right: 16px;
+            flex-direction: row-reverse;
+        }
+
+        /* Каждая струна */
+        .resonance-string {
             width: 1px;
             height: 100vh;
             background: #e0a968;
-            z-index: 0;
-            pointer-events: none;
+            opacity: 0.05;
+            transition: opacity 1.2s ease;
+            border-radius: 1px;
+        }
+
+        /* Разная толщина и базовая яркость */
+        .string-left-1, .string-right-1 {
+            width: 1.5px;
             opacity: 0.08;
-            transition: opacity 0.8s ease;
         }
-        .string-left {
-            left: 20px;
+        .string-left-2, .string-right-2 {
+            width: 1px;
+            opacity: 0.04;
         }
-        .string-right {
-            right: 20px;
+        .string-left-3, .string-right-3 {
+            width: 0.5px;
+            opacity: 0.06;
         }
         
         /* Шапка */
@@ -258,8 +282,16 @@
 <body>
 
     <!-- СТРУНЫ -->
-    <div class="resonance-string string-left"></div>
-    <div class="resonance-string string-right"></div>
+    <div class="string-group string-group-left">
+        <div class="resonance-string string-left-1"></div>
+        <div class="resonance-string string-left-2"></div>
+        <div class="resonance-string string-left-3"></div>
+    </div>
+    <div class="string-group string-group-right">
+        <div class="resonance-string string-right-1"></div>
+        <div class="resonance-string string-right-2"></div>
+        <div class="resonance-string string-right-3"></div>
+    </div>
 
     <div class="container">
 
@@ -435,9 +467,15 @@
             });
         }
 
-        // Живые струны
-        const leftString = document.querySelector('.string-left');
-        const rightString = document.querySelector('.string-right');
+        // Живые струны — квартет
+        const strings = [
+            { el: document.querySelector('.string-left-1'), base: 0.08, peak: 0.35, delay: 0 },
+            { el: document.querySelector('.string-left-2'), base: 0.04, peak: 0.25, delay: 40 },
+            { el: document.querySelector('.string-left-3'), base: 0.06, peak: 0.3, delay: 80 },
+            { el: document.querySelector('.string-right-1'), base: 0.08, peak: 0.35, delay: 20 },
+            { el: document.querySelector('.string-right-2'), base: 0.04, peak: 0.25, delay: 60 },
+            { el: document.querySelector('.string-right-3'), base: 0.06, peak: 0.3, delay: 100 },
+        ];
 
         let lastScrollY = window.scrollY;
         let ticking = false;
@@ -445,14 +483,15 @@
         function updateStrings() {
             const currentScrollY = window.scrollY;
             const speed = Math.abs(currentScrollY - lastScrollY);
-            
             const intensity = Math.min(speed / 15, 1);
-            const opacity = 0.08 + intensity * 0.32;
             
-            if (leftString && rightString) {
-                leftString.style.opacity = opacity;
-                rightString.style.opacity = opacity;
-            }
+            strings.forEach(s => {
+                if (!s.el) return;
+                const target = s.base + intensity * (s.peak - s.base);
+                setTimeout(() => {
+                    s.el.style.opacity = target;
+                }, s.delay);
+            });
             
             lastScrollY = currentScrollY;
             ticking = false;
@@ -469,8 +508,12 @@
         window.addEventListener('scroll', () => {
             clearTimeout(idleTimer);
             idleTimer = setTimeout(() => {
-                if (leftString) leftString.style.opacity = 0.08;
-                if (rightString) rightString.style.opacity = 0.08;
+                strings.forEach(s => {
+                    if (!s.el) return;
+                    setTimeout(() => {
+                        s.el.style.opacity = s.base;
+                    }, s.delay);
+                });
             }, 800);
         });
     </script>
