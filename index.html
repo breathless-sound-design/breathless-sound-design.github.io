@@ -33,7 +33,7 @@
             font-weight: 700;
             margin-bottom: 10px;
             letter-spacing: -1.5px;
-            background: linear-gradient(135deg, #f0a500, #ffb700);
+            background: linear-gradient(135deg, #d4a574, #cd9a62);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -43,23 +43,23 @@
             font-weight: 300;
         }
         .btn {
-            background: #f0a500;
-            color: #0a0a0a;
+            background: transparent;
+            color: #d4a574;
             padding: 14px 36px;
-            border-radius: 4px;
-            font-weight: 600;
+            border-radius: 8px;
+            font-weight: 500;
             text-decoration: none;
             display: inline-block;
             margin-top: 30px;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            border: 1.5px solid #d4a574;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
         }
         .btn:hover {
-            background: #ffb700;
+            background: #d4a574;
+            color: #0a0a0a;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(240,165,0,0.3);
+            box-shadow: 0 10px 25px rgba(212, 167, 116, 0.25);
         }
 
         /* Фильтры */
@@ -73,19 +73,19 @@
         .filter-btn {
             background: transparent;
             border: 1px solid #333;
-            color: #aaa;
+            color: #999;
             padding: 10px 24px;
-            border-radius: 30px;
+            border-radius: 6px;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
-            background: #f0a500;
-            border-color: #f0a500;
+            background: #d4a574;
+            border-color: #d4a574;
             color: #0a0a0a;
-            font-weight: 600;
+            font-weight: 500;
         }
 
         /* Секции */
@@ -97,6 +97,7 @@
             margin-bottom: 40px;
             position: relative;
             display: inline-block;
+            color: #fff;
         }
         .block h2::after {
             content: '';
@@ -105,7 +106,7 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: #f0a500;
+            background: #d4a574;
         }
 
         /* Сетка карточек */
@@ -116,7 +117,7 @@
         }
         .card {
             background: #111;
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: 1px solid #1a1a1a;
@@ -125,7 +126,7 @@
             animation: fadeInUp 0.6s forwards;
         }
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             border-color: #333;
         }
@@ -203,15 +204,19 @@
         }
         ul li::before {
             content: "▹";
-            color: #f0a500;
+            color: #d4a574;
             position: absolute;
             left: 0;
         }
         .contacts a {
-            color: #f0a500;
+            color: #d4a574;
             text-decoration: none;
             margin-right: 25px;
             font-size: 18px;
+            transition: color 0.2s;
+        }
+        .contacts a:hover {
+            color: #fff;
         }
         footer {
             text-align: center;
@@ -232,7 +237,7 @@
 <div class="container">
 
     <header>
-        <h1>Иван Иванов</h1>
+        <h1>Юлия Кузнецова</h1>
         <p>Звукорежиссёр · Саунд-дизайнер</p>
         <p style="font-size: 18px; color: #888; margin-top: 10px;">Превращаю идею в чистый звук</p>
         <a href="#projects" class="btn">Смотреть портфолио</a>
@@ -293,43 +298,43 @@
             <div class="video-wrapper"><iframe src="https://kinescope.io/embed/rVBcXQxMgsPgFmzs4hjd1P" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
             <div class="card-content"><h3>Название проекта 9</h3><p>ТВ-шоу / 2024 / Постпродакшн</p></div>
         </div>
-        <!-- 10 АУДИОКНИГА -->
+        <!-- 10 -->
         <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">📖</span></div>
+            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
             <div class="card-content">
-                <h3>The Poem</h3><p>Аудиокнига / Озвучка, мастеринг</p>
+                <h3>The Poem</h3><p>Озвучка, мастеринг</p>
                 <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The_Poem .mp3" type="audio/mpeg"></audio>
             </div>
         </div>
-        <!-- 11 ПОДКАСТ -->
+        <!-- 11 -->
         <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎙️</span></div>
+            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
             <div class="card-content">
-                <h3>The Fragment Of The Blue Grid</h3><p>Подкаст / Сведение, чистка шумов</p>
+                <h3>The Fragment Of The Blue Grid</h3><p>Сведение, чистка шумов</p>
                 <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/The%20Fragment%20Of%20The%20Blue%20Grid%20Podcast.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
-        <!-- 12 ПОДКАСТ -->
+        <!-- 12 -->
         <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎙️</span></div>
+            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
             <div class="card-content">
-                <h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Подкаст / Интервью</p>
+                <h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Интервью</p>
                 <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Episode%2011%20Lt%20Col%20(Dr.)%20Cynthia%20Rutherford.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
-        <!-- 13 ПОДКАСТ -->
+        <!-- 13 -->
         <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎙️</span></div>
+            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
             <div class="card-content">
-                <h3>Blue Grit Episode 1 Colonel Hammiel</h3><p>Подкаст / Запись, постпродакшн</p>
+                <h3>Blue Grit Episode 1 Colonel Hammiel</h3><p>Запись, постпродакшн</p>
                 <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Blue%20Grit%20Episode%201%20Colonel%20Hammiel.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
-        <!-- 14 АУДИОКНИГА -->
+        <!-- 14 -->
         <div class="card audio-card" data-category="audio">
-            <div class="audio-artwork"><span style="color:#555; font-size:48px;">📖</span></div>
+            <div class="audio-artwork"><span style="color:#555; font-size:48px;">🎧</span></div>
             <div class="card-content">
-                <h3>Audiobook Lost In The Post</h3><p>Аудиокнига / Актёрская озвучка</p>
+                <h3>Audiobook Lost In The Post</h3><p>Актёрская озвучка</p>
                 <audio controls><source src="https://raw.githubusercontent.com/breathless-sound-design/breathless-sound-design.github.io/main/audio/Audiobook_LostInThePost.mp3" type="audio/mpeg"></audio>
             </div>
         </div>
@@ -377,7 +382,7 @@
     </div>
 
     <footer>
-        &copy; 2026 Иван Иванов · Сделано на GitHub Pages
+        &copy; 2026 Юлия Кузнецова · Сделано на GitHub Pages
     </footer>
 </div>
 
@@ -393,7 +398,7 @@
         cards.forEach(card => {
             card.style.display = 'none';
             card.style.animation = 'none';
-            card.offsetHeight; // reflow
+            card.offsetHeight;
             card.style.animation = 'fadeInUp 0.6s forwards';
             
             if (category === 'all' || card.dataset.category.includes(category)) {
