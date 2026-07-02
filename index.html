@@ -516,6 +516,24 @@
                 });
             }, 800);
         });
+        
+        // Вспышка струн при клике на кнопки
+document.querySelectorAll('.btn, .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        strings.forEach((s, i) => {
+            if (!s.el) return;
+            // Зажигаем все разом на пик
+            s.el.style.transition = 'opacity 0.15s ease-out';
+            s.el.style.opacity = s.peak;
+            
+            // Плавно возвращаем к базе с индивидуальной задержкой
+            setTimeout(() => {
+                s.el.style.transition = `opacity 1.2s ease`;
+                s.el.style.opacity = s.base;
+            }, 200 + i * 30);
+        });
+    });
+});
     </script>
 
 </body>
