@@ -75,7 +75,26 @@
         header {
             text-align: center;
             padding: 100px 20px 60px;
+            position: relative;
         }
+        
+        /* Волна-подложка под именем */
+        .wave-underlay {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .wave-underlay svg {
+            width: 100%;
+            height: 100%;
+        }
+        
         header h1 {
             font-size: 56px;
             font-weight: 700;
@@ -84,11 +103,18 @@
             background: linear-gradient(135deg, #e0a968, #d4954a);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: 0 20px;
+            filter: drop-shadow(0 2px 8px rgba(10,10,10,0.8));
         }
         header p {
             font-size: 22px;
             color: #aaa;
             font-weight: 300;
+            position: relative;
+            z-index: 2;
         }
         .btn {
             background: transparent;
@@ -102,6 +128,8 @@
             letter-spacing: 1px;
             border: 1.5px solid #e0a968;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
         }
         .btn:hover {
             background: #e0a968;
@@ -130,6 +158,25 @@
             font-family: inherit;
         }
         .filter-btn:hover, .filter-btn.active {
+            background: #e0a968;
+            border-color: #e0a968;
+            color: #0a0a0a;
+            font-weight: 500;
+        }
+        .scroll-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #999;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .scroll-btn:hover {
             background: #e0a968;
             border-color: #e0a968;
             color: #0a0a0a;
@@ -194,6 +241,7 @@
         .card:nth-child(12) { animation-delay: 1.2s; }
         .card:nth-child(13) { animation-delay: 1.3s; }
         .card:nth-child(14) { animation-delay: 1.4s; }
+        .card:nth-child(15) { animation-delay: 1.5s; }
 
         @keyframes fadeInUp {
             to { opacity: 1; transform: translateY(0); }
@@ -303,8 +351,100 @@
     </div>
 
     <div class="container">
+        <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ -->
+    <div class="lang-switch">
+        <a href="index.html" class="active">🇷🇺 RU</a>
+        <span>|</span>
+        <a href="index-en.html">🇬🇧 EN</a>
+    </div>
 
         <header>
+            <!-- ВОЛНА-ПОДЛОЖКА -->
+            <div class="wave-underlay">
+                <svg viewBox="0 0 1200 70" preserveAspectRatio="none">
+                    <!-- Центральная жирная — высокая амплитуда, разная -->
+                    <path d="M0,35 
+                             C20,18 35,8 55,25 
+                             C75,42 90,55 110,30 
+                             C130,5 145,15 160,40 
+                             C175,65 190,48 210,28 
+                             C230,8 245,25 260,42 
+                             C275,59 290,38 310,20 
+                             C330,2 345,30 360,50 
+                             C375,70 390,45 410,22 
+                             C430,-1 445,18 460,38 
+                             C475,58 490,35 510,15 
+                             C530,-5 545,25 560,48 
+                             C575,71 590,40 610,20 
+                             C630,0 645,22 660,42 
+                             C675,62 690,35 710,18 
+                             C730,1 745,28 760,50 
+                             C775,72 790,38 810,22 
+                             C830,6 845,32 860,55 
+                             C875,78 890,42 910,24 
+                             C930,6 945,20 960,40 
+                             C975,60 990,35 1010,15 
+                             C1030,-5 1045,30 1060,52 
+                             C1075,74 1090,40 1110,22 
+                             C1130,4 1145,18 1160,35 
+                             C1175,52 1190,30 1200,35" 
+                          stroke="#e0a968" stroke-width="2.5" fill="none" opacity="0.7"/>
+                    <!-- Верхняя тонкая — своя амплитуда -->
+                    <path d="M0,28 
+                             C25,15 40,6 60,22 
+                             C80,38 95,48 115,25 
+                             C135,2 150,12 165,32 
+                             C180,52 195,38 215,22 
+                             C235,6 250,20 265,35 
+                             C280,50 295,32 315,16 
+                             C335,0 350,22 365,40 
+                             C380,58 395,35 415,18 
+                             C435,1 450,14 465,30 
+                             C480,46 495,28 515,12 
+                             C535,-4 550,20 565,38 
+                             C580,56 595,32 615,16 
+                             C635,0 650,18 665,34 
+                             C680,50 695,28 715,14 
+                             C735,0 750,22 765,40 
+                             C780,58 795,32 815,18 
+                             C835,4 850,26 865,44 
+                             C880,62 895,34 915,20 
+                             C935,6 950,16 965,32 
+                             C980,48 995,28 1015,12 
+                             C1035,-4 1050,24 1065,42 
+                             C1080,60 1095,32 1115,18 
+                             C1135,4 1150,14 1165,28 
+                             C1180,42 1190,24 1200,28" 
+                          stroke="#e0a968" stroke-width="1" fill="none" opacity="0.5"/>
+                    <!-- Нижняя тонкая — зеркальная, но не симметричная -->
+                    <path d="M0,42 
+                             C25,50 40,58 60,42 
+                             C80,26 95,18 115,38 
+                             C135,58 150,48 165,30 
+                             C180,12 195,24 215,42 
+                             C235,60 250,42 265,28 
+                             C280,14 295,30 315,48 
+                             C335,66 350,42 365,24 
+                             C380,6 395,28 415,46 
+                             C435,64 450,48 465,32 
+                             C480,16 495,34 515,52 
+                             C535,70 550,42 565,24 
+                             C580,6 595,30 615,48 
+                             C635,66 650,44 665,28 
+                             C680,12 695,34 715,50 
+                             C735,66 750,40 765,22 
+                             C780,4 795,30 815,46 
+                             C835,62 850,38 865,20 
+                             C880,2 895,28 915,44 
+                             C935,60 950,46 965,30 
+                             C980,14 995,34 1015,52 
+                             C1035,70 1050,40 1065,22 
+                             C1080,4 1095,30 1115,46 
+                             C1135,62 1150,48 1165,34 
+                             C1180,20 1190,38 1200,42" 
+                          stroke="#e0a968" stroke-width="1" fill="none" opacity="0.5"/>
+                </svg>
+            </div>
             <h1>Юлия Кузнецова</h1>
             <p>Звукорежиссёр · Саунд-дизайнер</p>
             <p style="font-size: 18px; color: #888; margin-top: 10px;">Превращаю идею в чистый звук</p>
@@ -316,6 +456,7 @@
             <button class="filter-btn active" onclick="filterCards('all')">Все работы</button>
             <button class="filter-btn" onclick="filterCards('video')">🎬 Видео</button>
             <button class="filter-btn" onclick="filterCards('audio')">🎧 Аудио</button>
+            <a href="#about" class="scroll-btn">👤 Обо мне</a>
         </div>
 
         <!-- ПРОЕКТЫ -->
@@ -356,7 +497,7 @@
                 <div class="video-wrapper"><iframe src="https://kinescope.io/embed/kt9z38D3G6HCN6s8hEm9WM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
                 <div class="card-content"><h3>Название проекта 7</h3><p>Док / 2023 / Интершум, чистка</p></div>
             </div>
-            <!-- 8  -->
+            <!-- 8 -->
             <div class="card" data-category="video">
                 <div class="video-wrapper"><iframe src="https://kinescope.io/embed/0E5Tgt9s964M95XiPuFDCn" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
                 <div class="card-content"><h3>Название проекта 8</h3><p>Видео / 2024</p></div>
@@ -368,104 +509,50 @@
             </div>
             <!-- 10 -->
             <div class="card audio-card" data-category="audio">
-    <div style="position: relative; padding-top: 56.25%; width: 100%;">
-        <iframe 
-            src="https://kinescope.io/embed/6567eVNmmiH9Gs2KKkpouN" 
-            allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-            frameborder="0" 
-            allowfullscreen 
-            style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">
-        </iframe>
-    </div>
-    <div class="card-content">
-        <h3>The Poem</h3>
-        <p>Озвучка, мастеринг</p>
-    </div>
-</div>
+                <div style="position: relative; padding-top: 56.25%; width: 100%;">
+                    <iframe src="https://kinescope.io/embed/6567eVNmmiH9Gs2KKkpouN" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>The Poem</h3><p>Озвучка, мастеринг</p></div>
+            </div>
             <!-- 11 -->
             <div class="card audio-card" data-category="audio">
                 <div style="position: relative; padding-top: 56.25%; width: 100%">
-                    <iframe 
-                        src="https://kinescope.io/embed/5VcLpwJEHrnoX4wnCLdkHQ" 
-                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">
-                    </iframe>
+                    <iframe src="https://kinescope.io/embed/5VcLpwJEHrnoX4wnCLdkHQ" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
                 </div>
-                <div class="card-content">
-                    <h3>The Fragment Of The Blue Grid</h3>
-                    <p>Сведение, чистка шумов</p>                
-                </div>
+                <div class="card-content"><h3>The Fragment Of The Blue Grid</h3><p>Сведение, чистка шумов</p></div>
             </div>
             <!-- 12 -->
             <div class="card audio-card" data-category="audio">
                 <div style="position: relative; padding-top: 56.25%; width: 100%">
-                    <iframe 
-                        src="https://kinescope.io/embed/f63uDV9zkexaTKXwhDwYr8" 
-                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">   
-                    </iframe>
+                    <iframe src="https://kinescope.io/embed/f63uDV9zkexaTKXwhDwYr8" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
                 </div>
-                <div class="card-content">
-                    <h3>Episode 11 Lt Col Cynthia Rutherford</h3>
-                    <p>Актёрская озвучка</p>        
-                </div>
+                <div class="card-content"><h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Актёрская озвучка</p></div>
             </div>
             <!-- 13 -->
             <div class="card audio-card" data-category="audio">
                 <div style="position: relative; padding-top: 56.25%; width: 100%">
-                    <iframe 
-                        src="https://kinescope.io/embed/rQakdDRFYpMU1ufi17tjdu" 
-                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">   
-                    </iframe>
+                    <iframe src="https://kinescope.io/embed/rQakdDRFYpMU1ufi17tjdu" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
                 </div>
-                <div class="card-content">
-                    <h3>Effect Evriki 3</h3>
-                    <p>Актёрская озвучка</p>        
-                </div>
+                <div class="card-content"><h3>Effect Evriki 3</h3><p>Актёрская озвучка</p></div>
             </div>
             <!-- 14 -->
             <div class="card audio-card" data-category="audio">
                 <div style="position: relative; padding-top: 56.25%; width: 100%">
-                    <iframe 
-                        src="https://kinescope.io/embed/mSZn2oaMctCNhZ6v6WnjNh" 
-                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">   
-                    </iframe>
+                    <iframe src="https://kinescope.io/embed/mSZn2oaMctCNhZ6v6WnjNh" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
                 </div>
-                <div class="card-content">
-                    <h3>Effect Evriki 6</h3>
-                    <p>Актёрская озвучка</p>        
-                </div>
+                <div class="card-content"><h3>Effect Evriki 6</h3><p>Актёрская озвучка</p></div>
             </div>
             <!-- 15 -->
             <div class="card audio-card" data-category="audio">
                 <div style="position: relative; padding-top: 56.25%; width: 100%">
-                    <iframe 
-                        src="https://kinescope.io/embed/7AtG7qkFYoeyEDEhmFYESM" 
-                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" 
-                        frameborder="0" 
-                        allowfullscreen 
-                        style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;">                
-                    </iframe>
+                    <iframe src="https://kinescope.io/embed/7AtG7qkFYoeyEDEhmFYESM" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
                 </div>
-                <div class="card-content">
-                    <h3>Audiobook Lost In The Post</h3>
-                    <p>Интервью</p>
-                </div>
+                <div class="card-content"><h3>Audiobook Lost In The Post</h3><p>Интервью</p></div>
             </div>
         </div>
 
         <!-- О себе -->
-        <div class="block">
+        <div class="block" id="about">
             <h2>О себе</h2>
             <p style="font-size: 18px; margin-bottom: 20px;">Я не просто записываю звук. Я слышу структуру.</p>
             <p style="font-size: 18px; margin-bottom: 20px;">21 год в профессии. От реалити-шоу до постпродакшна кино. От записи диктора до финального сведения сериалов для НТВ. Закрываю полный цикл: монтаж, чистка, сведение, мастеринг.</p>
@@ -474,74 +561,74 @@
         </div>
 
         <!-- Оборудование и софт -->
-<div class="block">
-    <h2>Стек технологий</h2>
-    <div class="info-grid">
-        <ul>
-            <li><strong>Студийный стек:</strong> Pro Tools, Logic Pro, Nuendo, Cubase</li>
-            <li><strong>Реставрация и нейросети:</strong> iZotope RX, Auhponic, Suno</li>
-            <li><strong>Плагины:</strong> Waves, FabFilter</li>
-        </ul>
-        <ul>
-            <li><strong>Стандарты:</strong> Mono / Stereo / Dolby Surround</li>
-            <li><strong>Сведение:</strong> LUFS, западные стандарты доставки</li>
-            <li><strong>Дополнительно:</strong> DaVinci, Adobe Audition</li>
-        </ul>
-    </div>
-</div>
+        <div class="block">
+            <h2>Стек технологий</h2>
+            <div class="info-grid">
+                <ul>
+                    <li><strong>Студийный стек:</strong> Pro Tools, Logic Pro, Nuendo, Cubase</li>
+                    <li><strong>Реставрация и нейросети:</strong> iZotope RX, Auhponic, Suno</li>
+                    <li><strong>Плагины:</strong> Waves, FabFilter</li>
+                </ul>
+                <ul>
+                    <li><strong>Стандарты:</strong> Mono / Stereo / Dolby Surround</li>
+                    <li><strong>Сведение:</strong> LUFS, западные стандарты доставки</li>
+                    <li><strong>Дополнительно:</strong> DaVinci, Adobe Audition</li>
+                </ul>
+            </div>
+        </div>
 
         <!-- Образование -->
-<div class="block">
-    <h2>Образование</h2>
-    <div class="info-grid">
-        <div>
-            <p style="font-size: 18px; margin-bottom: 15px;"><strong>Middle Tennessee State University (MTSU), США</strong><br>Магистр. Recording Arts & Technologies<br>Sound Design & Music Production</p>
-            <p style="font-size: 18px; margin-bottom: 15px;"><strong>Школа искусств, Химки</strong><br>Музыкальный факультет<br>Специальность — скрипка</p>
+        <div class="block">
+            <h2>Образование</h2>
+            <div class="info-grid">
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>Middle Tennessee State University (MTSU), США</strong><br>Магистр. Recording Arts & Technologies<br>Sound Design & Music Production</p>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>Школа искусств, Химки</strong><br>Музыкальный факультет<br>Специальность — скрипка</p>
+                </div>
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>Английский язык: С1 (Advanced)</strong><br>TOEFL, GRE. Работаю с международными проектами без переводчика.</p>
+                    <p style="font-size: 18px;"><strong>Курсы повышения квалификации</strong><br>Дипломатическая академия при МИД РФ</p>
+                </div>
+            </div>
         </div>
-        <div>
-            <p style="font-size: 18px; margin-bottom: 15px;"><strong>Английский язык: С1 (Advanced)</strong><br>TOEFL, GRE. Работаю с международными проектами без переводчика.</p>
-            <p style="font-size: 18px;"><strong>Курсы повышения квалификации</strong><br>Дипломатическая академия при МИД РФ</p>
-        </div>
-    </div>
-</div>
 
         <!-- Опыт -->
-<div class="block">
-    <h2>Избранный опыт</h2>
-    <div class="info-grid">
-        <div>
-            <p style="font-size: 18px; margin-bottom: 10px;"><strong>Кино и ТВ</strong></p>
-            <ul style="margin-bottom: 20px;">
-                <li>«Окончательный Вердикт» — НТВ</li>
-                <li>«Особый Случай» — Россия 1</li>
-                <li>«Я Работаю в Суде» — НТВ</li>
-                <li>«Тайный Знак-З», «Next», «Светские Хроники»</li>
-                <li>Реалити-шоу «Дом-2», «Голод. Нью-Йорк» — ТНТ</li>
-            </ul>
+        <div class="block">
+            <h2>Избранный опыт</h2>
+            <div class="info-grid">
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 10px;"><strong>Кино и ТВ</strong></p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>«Окончательный Вердикт» — НТВ</li>
+                        <li>«Особый Случай» — Россия 1</li>
+                        <li>«Я Работаю в Суде» — НТВ</li>
+                        <li>«Тайный Знак-З», «Next», «Светские Хроники»</li>
+                        <li>Реалити-шоу «Дом-2», «Голод. Нью-Йорк» — ТНТ</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 10px;"><strong>Ключевые площадки</strong></p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Киностудия им. Горького (Post-Production)</li>
+                        <li>CineLab (перезапись)</li>
+                        <li>Дикое ТВ (сведение, sound design)</li>
+                        <li>Media 1 (промо, эфир)</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size: 18px; margin-top: 10px;"><strong>14 лет на фрилансе:</strong> фильмы, сериалы, подкасты, аудиокниги. Умею работать с актёрами и дикторами. Контролирую качество на всех этапах — от записи до финальной сдачи.</p>
         </div>
-        <div>
-            <p style="font-size: 18px; margin-bottom: 10px;"><strong>Ключевые площадки</strong></p>
-            <ul style="margin-bottom: 20px;">
-                <li>Киностудия им. Горького (Post-Production)</li>
-                <li>CineLab (перезапись)</li>
-                <li>Дикое ТВ (сведение, sound design)</li>
-                <li>Media 1 (промо, эфир)</li>
-            </ul>
-        </div>
-    </div>
-    <p style="font-size: 18px; margin-top: 10px;"><strong>14 лет на фрилансе:</strong> фильмы, сериалы, подкасты, аудиокниги. Умею работать с актёрами и дикторами. Контролирую качество на всех этапах — от записи до финальной сдачи.</p>
-</div>
 
         <!-- Контакты -->
-<div class="block contacts">
-    <h2>Контакты</h2>
-    <p>
-        <a href="mailto:juliasound2008@gmail.com">✉️ juliasound2008@gmail.com</a>
-        <a href="https://t.me/Yuliya_Breatless">📱 Telegram</a>
-        <a href="https://disk.yandex.ru/d/6sQR14Y4OcOM9w">📂 Примеры работ</a>
-    </p>
-    <a href="mailto:juliasound2008@gmail.com" class="btn">Написать</a>
-</div>
+        <div class="block contacts">
+            <h2>Контакты</h2>
+            <p>
+                <a href="mailto:juliasound2008@gmail.com">✉️ juliasound2008@gmail.com</a>
+                <a href="https://t.me/Yuliya_Breatless">📱 Telegram</a>
+                <a href="https://disk.yandex.ru/d/6sQR14Y4OcOM9w">📂 Примеры работ</a>
+            </p>
+            <a href="mailto:juliasound2008@gmail.com" class="btn">Написать</a>
+        </div>
 
         <footer>
             &copy; 2026 Юлия Кузнецова · Сделано на GitHub Pages
@@ -550,10 +637,22 @@
 
     <!-- Скрипты -->
     <script>
+        // Плавный скролл для всех якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
         // Фильтры
         function filterCards(category) {
             const cards = document.querySelectorAll('#projectGrid .card');
             const btns = document.querySelectorAll('.filter-btn');
+            const grid = document.querySelector('#projectGrid');
             
             btns.forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
@@ -568,6 +667,12 @@
                     card.style.display = 'block';
                 }
             });
+            
+            // Плавный скролл к началу сетки проектов
+            setTimeout(() => {
+                const y = grid.getBoundingClientRect().top + window.pageYOffset - 30;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }, 100);
         }
 
         // Живые струны — квартет
@@ -621,22 +726,20 @@
         });
         
         // Вспышка струн при клике на кнопки
-document.querySelectorAll('.btn, .filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        strings.forEach((s, i) => {
-            if (!s.el) return;
-            // Зажигаем все разом на пик
-            s.el.style.transition = 'opacity 0.15s ease-out';
-            s.el.style.opacity = s.peak;
-            
-            // Плавно возвращаем к базе с индивидуальной задержкой
-            setTimeout(() => {
-                s.el.style.transition = `opacity 1.2s ease`;
-                s.el.style.opacity = s.base;
-            }, 200 + i * 30);
+        document.querySelectorAll('.btn, .filter-btn, .scroll-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                strings.forEach((s, i) => {
+                    if (!s.el) return;
+                    s.el.style.transition = 'opacity 0.15s ease-out';
+                    s.el.style.opacity = s.peak;
+                    
+                    setTimeout(() => {
+                        s.el.style.transition = `opacity 1.2s ease`;
+                        s.el.style.opacity = s.base;
+                    }, 200 + i * 30);
+                });
+            });
         });
-    });
-});
     </script>
 
 </body>
