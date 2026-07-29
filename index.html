@@ -27,6 +27,31 @@
             position: relative;
             z-index: 1;
         }
+
+        /* Переключатель языков */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            font-size: 14px;
+        }
+        .lang-switch a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+            margin: 0 2px;
+        }
+        .lang-switch a.active {
+            color: #e0a968;
+            font-weight: 500;
+        }
+        .lang-switch a:hover {
+            color: #e0a968;
+        }
+        .lang-switch span {
+            color: #444;
+        }
         
         /* Группы струн */
         .string-group {
