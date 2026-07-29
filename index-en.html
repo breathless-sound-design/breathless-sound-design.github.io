@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Engineer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #0a0a0a;
+            color: #eee;
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Переключатель языков */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            font-size: 14px;
+        }
+        .lang-switch a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+            margin: 0 2px;
+        }
+        .lang-switch a.active {
+            color: #e0a968;
+            font-weight: 500;
+        }
+        .lang-switch a:hover {
+            color: #e0a968;
+        }
+        .lang-switch span {
+            color: #444;
+        }
+        
+        /* Группы струн */
+        .string-group {
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            display: flex;
+            gap: 6px;
+        }
+        .string-group-left {
+            left: 16px;
+            flex-direction: row;
+        }
+        .string-group-right {
+            right: 16px;
+            flex-direction: row-reverse;
+        }
+
+        /* Каждая струна */
+        .resonance-string {
+            width: 1px;
+            height: 100vh;
+            background: #e0a968;
+            opacity: 0.05;
+            transition: opacity 1.2s ease;
+            border-radius: 1px;
+        }
+
+        /* Разная толщина и базовая яркость */
+        .string-left-1, .string-right-1 {
+            width: 1.5px;
+            opacity: 0.08;
+        }
+        .string-left-2, .string-right-2 {
+            width: 1px;
+            opacity: 0.04;
+        }
+        .string-left-3, .string-right-3 {
+            width: 0.5px;
+            opacity: 0.06;
+        }
+        
+        /* Шапка */
+        header {
+            text-align: center;
+            padding: 100px 20px 60px;
+            position: relative;
+        }
+        
+        /* Волна-подложка под именем */
+        .wave-underlay {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            transform: translateY(-50%);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .wave-underlay svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        header h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, #e0a968, #d4954a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 2;
+            display: inline-block;
+            padding: 0 20px;
+            filter: drop-shadow(0 2px 8px rgba(10,10,10,0.8));
+        }
+        header p {
+            font-size: 22px;
+            color: #aaa;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+        .btn {
+            background: transparent;
+            color: #e0a968;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+            letter-spacing: 1px;
+            border: 1.5px solid #e0a968;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+        .btn:hover {
+            background: #e0a968;
+            color: #0a0a0a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(224, 169, 104, 0.3);
+        }
+
+        /* Фильтры */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 20px 0 50px;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #999;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: #e0a968;
+            border-color: #e0a968;
+            color: #0a0a0a;
+            font-weight: 500;
+        }
+        .scroll-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #999;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .scroll-btn:hover {
+            background: #e0a968;
+            border-color: #e0a968;
+            color: #0a0a0a;
+            font-weight: 500;
+        }
+
+        /* Секции */
+        .block {
+            margin: 80px 0;
+        }
+        .block h2 {
+            font-size: 32px;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            color: #fff;
+        }
+        .block h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e0a968;
+        }
+
+        /* Сетка карточек */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .card {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #1a1a1a;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s forwards;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            border-color: #333;
+        }
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+        .card:nth-child(9) { animation-delay: 0.9s; }
+        .card:nth-child(10) { animation-delay: 1.0s; }
+        .card:nth-child(11) { animation-delay: 1.1s; }
+        .card:nth-child(12) { animation-delay: 1.2s; }
+        .card:nth-child(13) { animation-delay: 1.3s; }
+        .card:nth-child(14) { animation-delay: 1.4s; }
+        .card:nth-child(15) { animation-delay: 1.5s; }
+
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+        .card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .card p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* Видео обертка */
+        .video-wrapper {
+            position: relative;
+            padding-top: 56.25%;
+            background: #000;
+        }
+        .video-wrapper.vertical {
+            padding-top: 80%;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: none;
+        }
+
+        /* Аудио карточка */
+        .audio-card .audio-artwork {
+            background: linear-gradient(45deg, #1a1a1a, #222);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .audio-card audio {
+            width: 100%;
+            margin-top: 15px;
+            filter: invert(0.9);
+        }
+
+        /* Инфо сетка */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        ul {
+            list-style: none;
+        }
+        ul li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+        ul li::before {
+            content: "▹";
+            color: #e0a968;
+            position: absolute;
+            left: 0;
+        }
+        .contacts a {
+            color: #e0a968;
+            text-decoration: none;
+            margin-right: 25px;
+            font-size: 18px;
+            transition: color 0.2s;
+        }
+        .contacts a:hover {
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #555;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 60px;
+        }
+        @media (max-width: 700px) {
+            .info-grid { grid-template-columns: 1fr; }
+            header h1 { font-size: 36px; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- СТРУНЫ -->
+    <div class="string-group string-group-left">
+        <div class="resonance-string string-left-1"></div>
+        <div class="resonance-string string-left-2"></div>
+        <div class="resonance-string string-left-3"></div>
+    </div>
+    <div class="string-group string-group-right">
+        <div class="resonance-string string-right-1"></div>
+        <div class="resonance-string string-right-2"></div>
+        <div class="resonance-string string-right-3"></div>
+    </div>
+
+    <div class="container">
+
+        <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ -->
+        <div class="lang-switch">
+            <a href="index.html">🇷🇺 RU</a>
+            <span>|</span>
+            <a href="index-en.html" class="active">🇬🇧 EN</a>
+        </div>
+
+        <header>
+            <!-- ВОЛНА-ПОДЛОЖКА -->
+            <div class="wave-underlay">
+                <svg viewBox="0 0 1200 70" preserveAspectRatio="none">
+                    <!-- Центральная жирная — высокая амплитуда, разная -->
+                    <path d="M0,35 
+                             C20,18 35,8 55,25 
+                             C75,42 90,55 110,30 
+                             C130,5 145,15 160,40 
+                             C175,65 190,48 210,28 
+                             C230,8 245,25 260,42 
+                             C275,59 290,38 310,20 
+                             C330,2 345,30 360,50 
+                             C375,70 390,45 410,22 
+                             C430,-1 445,18 460,38 
+                             C475,58 490,35 510,15 
+                             C530,-5 545,25 560,48 
+                             C575,71 590,40 610,20 
+                             C630,0 645,22 660,42 
+                             C675,62 690,35 710,18 
+                             C730,1 745,28 760,50 
+                             C775,72 790,38 810,22 
+                             C830,6 845,32 860,55 
+                             C875,78 890,42 910,24 
+                             C930,6 945,20 960,40 
+                             C975,60 990,35 1010,15 
+                             C1030,-5 1045,30 1060,52 
+                             C1075,74 1090,40 1110,22 
+                             C1130,4 1145,18 1160,35 
+                             C1175,52 1190,30 1200,35" 
+                          stroke="#e0a968" stroke-width="2.5" fill="none" opacity="0.7"/>
+                    <!-- Верхняя тонкая — своя амплитуда -->
+                    <path d="M0,28 
+                             C25,15 40,6 60,22 
+                             C80,38 95,48 115,25 
+                             C135,2 150,12 165,32 
+                             C180,52 195,38 215,22 
+                             C235,6 250,20 265,35 
+                             C280,50 295,32 315,16 
+                             C335,0 350,22 365,40 
+                             C380,58 395,35 415,18 
+                             C435,1 450,14 465,30 
+                             C480,46 495,28 515,12 
+                             C535,-4 550,20 565,38 
+                             C580,56 595,32 615,16 
+                             C635,0 650,18 665,34 
+                             C680,50 695,28 715,14 
+                             C735,0 750,22 765,40 
+                             C780,58 795,32 815,18 
+                             C835,4 850,26 865,44 
+                             C880,62 895,34 915,20 
+                             C935,6 950,16 965,32 
+                             C980,48 995,28 1015,12 
+                             C1035,-4 1050,24 1065,42 
+                             C1080,60 1095,32 1115,18 
+                             C1135,4 1150,14 1165,28 
+                             C1180,42 1190,24 1200,28" 
+                          stroke="#e0a968" stroke-width="1" fill="none" opacity="0.5"/>
+                    <!-- Нижняя тонкая — зеркальная, но не симметричная -->
+                    <path d="M0,42 
+                             C25,50 40,58 60,42 
+                             C80,26 95,18 115,38 
+                             C135,58 150,48 165,30 
+                             C180,12 195,24 215,42 
+                             C235,60 250,42 265,28 
+                             C280,14 295,30 315,48 
+                             C335,66 350,42 365,24 
+                             C380,6 395,28 415,46 
+                             C435,64 450,48 465,32 
+                             C480,16 495,34 515,52 
+                             C535,70 550,42 565,24 
+                             C580,6 595,30 615,48 
+                             C635,66 650,44 665,28 
+                             C680,12 695,34 715,50 
+                             C735,66 750,40 765,22 
+                             C780,4 795,30 815,46 
+                             C835,62 850,38 865,20 
+                             C880,2 895,28 915,44 
+                             C935,60 950,46 965,30 
+                             C980,14 995,34 1015,52 
+                             C1035,70 1050,40 1065,22 
+                             C1080,4 1095,30 1115,46 
+                             C1135,62 1150,48 1165,34 
+                             C1180,20 1190,38 1200,42" 
+                          stroke="#e0a968" stroke-width="1" fill="none" opacity="0.5"/>
+                </svg>
+            </div>
+            <h1>Yulia Kuznetsova</h1>
+            <p>Sound Engineer · Sound Designer</p>
+            <p style="font-size: 18px; color: #888; margin-top: 10px;">Turning ideas into pure sound</p>
+            <a href="#projects" class="btn">View Portfolio</a>
+        </header>
+
+        <!-- ФИЛЬТРЫ -->
+        <div class="filters" id="projects">
+            <button class="filter-btn active" onclick="filterCards('all')">All Works</button>
+            <button class="filter-btn" onclick="filterCards('video')">🎬 Video</button>
+            <button class="filter-btn" onclick="filterCards('audio')">🎧 Audio</button>
+            <a href="#about" class="scroll-btn">👤 About Me</a>
+        </div>
+
+        <!-- ПРОЕКТЫ -->
+        <div class="grid" id="projectGrid">
+            
+            <!-- 1 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/iNQF3dtMKR7PPJ1zEUGPbb" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 1</h3><p>Film / 2024 / Sound Engineer</p></div>
+            </div>
+            <!-- 2 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/trM3AevFqm5GNfZtZYAfvP" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 2</h3><p>Commercial / 2023 / Sound Design</p></div>
+            </div>
+            <!-- 3 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/8XnN2xFXJFDukWHzZHEgnH" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 3</h3><p>Music Video / 2024 / Mixing</p></div>
+            </div>
+            <!-- 4 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/spYPZNdzaPq3vUeJ4k4aSx" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 4</h3><p>Short Film / 2023 / On-Set Sound</p></div>
+            </div>
+            <!-- 5 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/rVBcXQxMgsPgFmzs4hjd1P" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Car Commercial</h3><p>Sound Design / Mixing</p></div>
+            </div>
+            <!-- 6 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/mgxY8rjsz4YpGALoXQt2rz" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 6</h3><p>Animation / 2024 / Voiceover, Mixing</p></div>
+            </div>
+            <!-- 7 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/kt9z38D3G6HCN6s8hEm9WM" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 7</h3><p>Documentary / 2023 / Noise Reduction</p></div>
+            </div>
+            <!-- 8 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/0E5Tgt9s964M95XiPuFDCn" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 8</h3><p>Video / 2024</p></div>
+            </div>
+            <!-- 9 -->
+            <div class="card" data-category="video">
+                <div class="video-wrapper"><iframe src="https://kinescope.io/embed/9SJDK6LZ3U1SDNY5AtauYu" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+                <div class="card-content"><h3>Project 9</h3><p>Sound Design / Mixing</p></div>
+            </div>
+            <!-- 10 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%;">
+                    <iframe src="https://kinescope.io/embed/6567eVNmmiH9Gs2KKkpouN" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>The Poem</h3><p>Voiceover, Mastering</p></div>
+            </div>
+            <!-- 11 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/5VcLpwJEHrnoX4wnCLdkHQ" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>The Fragment Of The Blue Grid</h3><p>Mixing, Noise Reduction</p></div>
+            </div>
+            <!-- 12 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/f63uDV9zkexaTKXwhDwYr8" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>Episode 11 Lt Col Cynthia Rutherford</h3><p>Voiceover</p></div>
+            </div>
+            <!-- 13 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/rQakdDRFYpMU1ufi17tjdu" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>Effect Evriki 3</h3><p>Voiceover</p></div>
+            </div>
+            <!-- 14 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/mSZn2oaMctCNhZ6v6WnjNh" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>Effect Evriki 6</h3><p>Voiceover</p></div>
+            </div>
+            <!-- 15 -->
+            <div class="card audio-card" data-category="audio">
+                <div style="position: relative; padding-top: 56.25%; width: 100%">
+                    <iframe src="https://kinescope.io/embed/7AtG7qkFYoeyEDEhmFYESM" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock;" frameborder="0" allowfullscreen style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"></iframe>
+                </div>
+                <div class="card-content"><h3>Audiobook Lost In The Post</h3><p>Interview</p></div>
+            </div>
+        </div>
+
+        <!-- ABOUT -->
+        <div class="block" id="about">
+            <h2>About Me</h2>
+            <p style="font-size: 18px; margin-bottom: 20px;">I don't just record sound. I hear the structure.</p>
+            <p style="font-size: 18px; margin-bottom: 20px;">21 years in the industry. From reality TV to film post-production. From voiceover recording to final mixing for NTV series. Full cycle: editing, noise reduction, mixing, mastering.</p>
+            <p style="font-size: 18px; margin-bottom: 20px;">I use neural networks where traditional methods fail. I restore audio that others write off as unusable.</p>
+            <p style="font-size: 18px;">I hear what others miss. I make sound that sticks.</p>
+        </div>
+
+        <!-- TECH STACK -->
+        <div class="block">
+            <h2>Tech Stack</h2>
+            <div class="info-grid">
+                <ul>
+                    <li><strong>Studio DAWs:</strong> Pro Tools, Logic Pro, Nuendo, Cubase</li>
+                    <li><strong>Restoration & AI:</strong> iZotope RX, Auhponic, Suno</li>
+                    <li><strong>Plugins:</strong> Waves, FabFilter</li>
+                </ul>
+                <ul>
+                    <li><strong>Standards:</strong> Mono / Stereo / Dolby Surround</li>
+                    <li><strong>Mixing:</strong> LUFS, Western delivery standards</li>
+                    <li><strong>Additional:</strong> DaVinci, Adobe Audition</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="block">
+            <h2>Education</h2>
+            <div class="info-grid">
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>Middle Tennessee State University (MTSU), USA</strong><br>Master's Degree. Recording Arts & Technologies<br>Sound Design & Music Production</p>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>School of Arts, Khimki</strong><br>Music Department<br>Major — Violin</p>
+                </div>
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 15px;"><strong>English: C1 (Advanced)</strong><br>TOEFL, GRE. I work with international projects without an interpreter.</p>
+                    <p style="font-size: 18px;"><strong>Professional Development</strong><br>Diplomatic Academy, Russian Ministry of Foreign Affairs</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- EXPERIENCE -->
+        <div class="block">
+            <h2>Selected Experience</h2>
+            <div class="info-grid">
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 10px;"><strong>Film & TV</strong></p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>"Final Verdict" — NTV</li>
+                        <li>"Special Case" — Rossiya 1</li>
+                        <li>"I Work in Court" — NTV</li>
+                        <li>"The Secret Sign-Z", "Next", "Social Chronicles"</li>
+                        <li>Reality Show "Dom-2", "Hunger. New York" — TNT</li>
+                    </ul>
+                </div>
+                <div>
+                    <p style="font-size: 18px; margin-bottom: 10px;"><strong>Key Studios</strong></p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Gorky Film Studio (Post-Production)</li>
+                        <li>CineLab (Re-recording)</li>
+                        <li>Dikoe TV (Mixing, Sound Design)</li>
+                        <li>Media 1 (Promo, Broadcast)</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="font-size: 18px; margin-top: 10px;"><strong>14 years as a freelancer:</strong> films, TV series, podcasts, audiobooks. Experienced in working with actors and voice talent. Quality control at all stages — from recording to final delivery.</p>
+        </div>
+
+        <!-- CONTACTS -->
+        <div class="block contacts">
+            <h2>Contacts</h2>
+            <p>
+                <a href="mailto:juliasound2008@gmail.com">✉️ juliasound2008@gmail.com</a>
+                <a href="https://t.me/Yuliya_Breatless">📱 Telegram</a>
+                <a href="https://disk.yandex.ru/d/6sQR14Y4OcOM9w">📂 Work Samples</a>
+            </p>
+            <a href="mailto:juliasound2008@gmail.com" class="btn">Get in Touch</a>
+        </div>
+
+        <footer>
+            &copy; 2026 Yulia Kuznetsova · Powered by GitHub Pages
+        </footer>
+    </div>
+
+    <!-- Скрипты -->
+    <script>
+        // Плавный скролл для всех якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Фильтры
+        function filterCards(category) {
+            const cards = document.querySelectorAll('#projectGrid .card');
+            const btns = document.querySelectorAll('.filter-btn');
+            const grid = document.querySelector('#projectGrid');
+            
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            cards.forEach(card => {
+                card.style.display = 'none';
+                card.style.animation = 'none';
+                card.offsetHeight;
+                card.style.animation = 'fadeInUp 0.6s forwards';
+                
+                if (category === 'all' || card.dataset.category.includes(category)) {
+                    card.style.display = 'block';
+                }
+            });
+            
+            // Плавный скролл с отступом 20px сверху
+            setTimeout(() => {
+                const y = grid.getBoundingClientRect().top + window.pageYOffset - 20;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }, 100);
+        }
+
+        // Живые струны — квартет
+        const strings = [
+            { el: document.querySelector('.string-left-1'), base: 0.08, peak: 0.35, delay: 0 },
+            { el: document.querySelector('.string-left-2'), base: 0.04, peak: 0.25, delay: 40 },
+            { el: document.querySelector('.string-left-3'), base: 0.06, peak: 0.3, delay: 80 },
+            { el: document.querySelector('.string-right-1'), base: 0.08, peak: 0.35, delay: 20 },
+            { el: document.querySelector('.string-right-2'), base: 0.04, peak: 0.25, delay: 60 },
+            { el: document.querySelector('.string-right-3'), base: 0.06, peak: 0.3, delay: 100 },
+        ];
+
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+
+        function updateStrings() {
+            const currentScrollY = window.scrollY;
+            const speed = Math.abs(currentScrollY - lastScrollY);
+            const intensity = Math.min(speed / 15, 1);
+            
+            strings.forEach(s => {
+                if (!s.el) return;
+                const target = s.base + intensity * (s.peak - s.base);
+                setTimeout(() => {
+                    s.el.style.opacity = target;
+                }, s.delay);
+            });
+            
+            lastScrollY = currentScrollY;
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateStrings);
+                ticking = true;
+            }
+        });
+
+        let idleTimer;
+        window.addEventListener('scroll', () => {
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                strings.forEach(s => {
+                    if (!s.el) return;
+                    setTimeout(() => {
+                        s.el.style.opacity = s.base;
+                    }, s.delay);
+                });
+            }, 800);
+        });
+        
+        // Вспышка струн при клике на кнопки
+        document.querySelectorAll('.btn, .filter-btn, .scroll-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                strings.forEach((s, i) => {
+                    if (!s.el) return;
+                    s.el.style.transition = 'opacity 0.15s ease-out';
+                    s.el.style.opacity = s.peak;
+                    
+                    setTimeout(() => {
+                        s.el.style.transition = `opacity 1.2s ease`;
+                        s.el.style.opacity = s.base;
+                    }, 200 + i * 30);
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
