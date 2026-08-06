@@ -757,9 +757,9 @@
                 }
             });
             
-            // Плавный скролл с отступом 20px сверху
+            // Плавный скролл к началу сетки проектов
             setTimeout(() => {
-                const y = grid.getBoundingClientRect().top + window.pageYOffset - 20;
+                const y = grid.getBoundingClientRect().top + window.pageYOffset - 30;
                 window.scrollTo({ top: y, behavior: 'smooth' });
             }, 100);
         }
